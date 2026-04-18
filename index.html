@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Caza de limones | Pro Edition</title>
+  <title>Caza de Limones | Pro Edition</title>
   <link rel="stylesheet" href="limones.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body onload="iniciar()">
 
@@ -22,20 +22,20 @@
     </div>
     
     <div class="panel-stats">
-      <div class="stat-box">
+      <div class="stat-box puntaje-box">
         <span class="label">PUNTAJE</span>
         <span id="txtPuntaje" class="value">0</span>
       </div>
-      <div class="stat-box">
+      <div class="stat-box vidas-box">
         <span class="label">VIDAS</span>
         <span id="txtVidas" class="value highlight">3</span>
       </div>
     </div>
 
     <div class="botones">
-      <button class="btn-nav" onclick="moverIzquierda()">← IZQUIERDA</button>
-      <button class="btn-action">REINICIAR</button>
-      <button class="btn-nav" onclick="moverDerecha()">DERECHA →</button>
+      <button class="btn btn-nav btn-izq" onclick="moverIzquierda()">← IZQUIERDA</button>
+      <button class="btn btn-action">REINICIAR</button>
+      <button class="btn btn-nav btn-der" onclick="moverDerecha()">DERECHA →</button>
     </div>
 
     <footer>

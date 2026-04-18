@@ -1,95 +1,267 @@
-/* ... (manten tus estilos anteriores de body y variables :root) ... */
-
+/* =========================================
+   VARIABLES Y CONFIGURACIÓN BASE
+   ========================================= */
 :root {
-  --bg-dark: #0f172a;
-  --panel-bg: rgba(30, 41, 59, 0.7);
+  --bg-dark: #070b14; /* Un negro más profundo para que el neón resalte */
+  --bg-dark-accent: #0f172a;
+  --panel-bg: rgba(15, 23, 42, 0.85); /* Más opaco y oscuro para contraste */
+  --panel-border: rgba(56, 189, 248, 0.2); /* Borde cian sutil */
+  
   --accent-cyan: #38bdf8;
+  --accent-cyan-dim: #0ea5e9;
   --accent-yellow: #fde047;
-  --accent-green: #84cc16; /* Nuevo color para el logo */
-  --text-main: #f8fafc;
+  --accent-green: #84cc16;
+  --text-main: #f1f5f9; /* Un blanco azulado muy claro */
   --danger: #ef4444;
+  --danger-dim: #dc2626;
+
+  /* Sombra de neón cian estándar */
+  --neon-glow-cyan: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+* {
+  box-sizing: border-radius;
 }
 
 body {
   font-family: 'Outfit', sans-serif;
-  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  /* Fondo radial con más profundidad */
+  background: radial-gradient(circle at center, var(--bg-dark-accent) 0%, var(--bg-dark) 100%);
   color: var(--text-main);
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  /* Sutil patrón de puntos arcade de fondo */
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
+/* =========================================
+   CONTENEDOR PRINCIPAL
+   ========================================= */
 .contenedor {
   max-width: 700px;
   width: 90%;
-  padding: 30px;
+  padding: 40px; /* Más padding para respirar */
   background: var(--panel-bg);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px); /* Efecto cristal glaseado más fuerte */
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--panel-border);
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(56, 189, 248, 0.1); /* Brillo externo cian muy sutil */
   text-align: center;
 }
 
-/* ESTILOS PARA LA NUEVA CABECERA Y LOGO */
+/* =========================================
+   CABECERA Y LOGO
+   ========================================= */
 .game-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .logo {
-  max-width: 120px; /* Ajusta el tamaño de tu imagen */
+  max-width: 140px; /* Un poco más grande */
   height: auto;
-  margin-bottom: 15px;
-  /* Efecto de "vibración" sutil y resplandor verde */
-  filter: drop-shadow(0 0 8px rgba(132, 204, 22, 0.5));
-  animation: float 3s ease-in-out infinite;
+  margin-bottom: 20px;
+  /* Resplandor verde que coincide con el logo */
+  filter: drop-shadow(0 0 12px rgba(132, 204, 22, 0.6));
+  animation: float 4s ease-in-out infinite; /* Animación más suave */
 }
 
 h1.titulo-principal {
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: var(--accent-yellow);
-  text-shadow: 3px 3px 0px #854d0e;
+  /* Sombra de texto 3D más limpia */
+  text-shadow: 2px 2px 0px #854d0e, 0 0 10px rgba(253, 224, 71, 0.3);
   margin: 0;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
 }
 
 .frase {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300; /* Peso ligero para elegancia */
   font-style: italic;
-  opacity: 0.8;
-  font-size: 0.9rem;
+  opacity: 0.7;
+  font-size: 1rem;
+  color: var(--accent-cyan); /* Color cian para coherencia */
   margin: 0;
 }
 
 /* ANIMACIÓN PARA EL LOGO */
 @keyframes float {
-  0% { transform: translatey(0px); }
-  50% { transform: translatey(-8px); }
-  100% { transform: translatey(0px); }
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
-/* ... (continúa con el resto de tus estilos para canvas, panel, botones, etc.) ... */
-/* Estilo del Canvas con bordes reforzados */
+/* =========================================
+   ÁREA DE JUEGO (CANVAS)
+   ======================================== */
 .juego-wrapper {
   position: relative;
-  display: inline-block; /* Para que el contenedor se ajuste al tamaño del canvas */
-  margin: 20px auto;
-  padding: 5px; /* Espacio extra para que el resplandor se vea bien */
-  background: linear-gradient(45deg, #38bdf8, #84cc16); /* Degradado entre cian y verde lima */
-  border-radius: 15px; /* Bordes redondeados para el marco externo */
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); /* Resplandor exterior */
+  display: inline-block;
+  margin: 25px auto;
+  padding: 8px; /* Más padding para el marco neón */
+  /* Degradado neón más vibrante */
+  background: linear-gradient(135deg, var(--accent-cyan), #fff, var(--accent-green));
+  border-radius: 18px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(56, 189, 248, 0.4); /* Brillo neón externo */
 }
 
 canvas {
-  background-color: #020617;
-  /* Aquí devolvemos el borde sólido que mencionaste */
-  border: 4px solid #38bdf8; 
+  background-color: #020617; /* Negro azulado para el canvas */
+  border: 4px solid rgba(2, 6, 23, 0.8); /* Borde interno casi negro */
   display: block;
-  margin: 0; /* Quitamos el margen aquí porque ya lo tiene el wrapper */
-  border-radius: 10px; /* Bordes redondeados suaves para el lienzo */
+  margin: 0;
+  border-radius: 12px;
+}
+
+/* =========================================
+   PANEL DE ESTADÍSTICAS
+   ========================================= */
+.panel-stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Separación consistente */
+  margin-bottom: 30px;
+}
+
+.stat-box {
+  background: rgba(7, 11, 20, 0.5); /* Fondo oscuro para contraste */
+  padding: 15px 30px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-3px); /* Pequeña interacción */
+}
+
+.puntaje-box {
+  border-bottom: 3px solid var(--accent-cyan);
+  box-shadow: 0 5px 15px -5px rgba(56, 189, 248, 0.2);
+}
+
+.vidas-box {
+  border-bottom: 3px solid var(--danger);
+  box-shadow: 0 5px 15px -5px rgba(239, 68, 68, 0.2);
+}
+
+.label {
+  display: block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(241, 245, 249, 0.6);
+  margin-bottom: 8px;
+}
+
+.value {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.3rem;
+  color: var(--text-main);
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.value.highlight {
+  color: var(--danger);
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+}
+
+/* =========================================
+   BOTONES INTERACTIVOS
+   ========================================= */
+.botones {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+/* Estilo base de botones */
+.btn {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de hundimiento al hacer clic */
+.btn:active {
+  transform: translateY(2px);
+}
+
+/* Botones de Navegación (Neón Cian Táctil) */
+.btn-nav {
+  background-color: transparent;
+  color: var(--accent-cyan);
+  border: 2px solid var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.btn-nav:hover {
+  background-color: var(--accent-cyan);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+}
+
+/* Botón de Acción Principal (Premium Amarillo/Oro) */
+.btn-action {
+  background: linear-gradient(135deg, var(--accent-yellow) 0%, #ca8a04 100%);
+  color: #422006;
+  box-shadow: 
+    0 4px 0px #854d0e, /* Efecto 3D de profundidad */
+    0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.btn-action:hover {
+  background: linear-gradient(135deg, #fffde7 0%, var(--accent-yellow) 100%);
+  transform: translateY(-2px); /* Pequeña elevación */
+  box-shadow: 
+    0 6px 0px #854d0e,
+    0 0 20px rgba(253, 224, 71, 0.5);
+}
+
+.btn-action:active {
+  transform: translateY(4px); /* Se hunde completamente */
+  box-shadow: 
+    0 2px 0px #854d0e,
+    0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+footer {
+  margin-top: 35px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(241, 245, 249, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 20px;
+}
+
+footer strong {
+  color: var(--accent-cyan);
+  font-weight: 700;
 }
