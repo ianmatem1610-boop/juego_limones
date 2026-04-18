@@ -25,7 +25,7 @@ function iniciar(){
 }
 
 function dibujarSuelo(){
-    ctx.fillStyle = "blue"; 
+    ctx.fillStyle = "brown"; 
     ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
 }
 
