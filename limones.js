@@ -105,3 +105,8 @@ function aparacerLimon(){
     limonY=0
     actualizarPantalla();
 }
+
+
+ function desaparecerPersonaje(){
+    ctx.clearRect(personajeX,personajeY,ALTURA_PERSONAJE,ANCHO_PERSONAJE)
+ }
