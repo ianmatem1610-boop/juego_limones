@@ -30,7 +30,7 @@ function dibujarSuelo(){
 }
 
 function dibujarPersonaje(){
-    ctx.fillStyle = "red"; 
+    ctx.fillStyle = "blue"; 
     ctx.fillRect(personajeX, personajeY, ANCHO_PERSONAJE, ALTURA_PERSONAJE); 
 }
 
